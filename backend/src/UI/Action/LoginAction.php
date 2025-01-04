@@ -11,9 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 #[Route(path:'/login', name: 'login', methods: ['POST'])]
-class LoginAction
+final class LoginAction
 {
-    public function __construct()
+    public function __construct(
+
+    )
     {
     }
 

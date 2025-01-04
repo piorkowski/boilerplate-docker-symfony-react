@@ -1,0 +1,27 @@
+.nav {
+    padding: 1rem;
+}
+
+.navList {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.navList li {
+    font-size: 1rem;
+}
+
+.navList li a {
+    text-decoration: none;
+}
+
+.navList li a:hover {
+    text-decoration: underline;
+}
+
+.active a {
+    font-weight: bold;
+}

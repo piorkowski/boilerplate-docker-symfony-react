@@ -12,21 +12,21 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    #[ORM\Id]
-    #[ORM\Column]
-    private ?string $id = null;
-
-    #[ORM\Column(length: 180)]
-    private ?string $email = null;
-
-    /**
-     * @var list<string> The user roles
-     */
-    #[ORM\Column]
-    private array $roles = [];
-
-    #[ORM\Column]
-    private ?string $password = null;
+    public function __construct(
+        #[ORM\Id]
+        #[ORM\Column]
+        private readonly string $id,
+        #[ORM\Column]
+        private ?string $password,
+        #[ORM\Column]
+        private array $roles = [],
+        #[ORM\Column(length: 180)]
+        private ?string $email = null,
+        #[ORM\Column]
+        private bool $enabled = false,
+    )
+    {
+    }
 
     public function getId(): ?int
     {
@@ -52,13 +52,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
+     * @return list<string>
      * @see UserInterface
      *
-     * @return list<string>
      */
     public function getRoles(): array
     {
@@ -101,5 +101,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    public function activate(): void
+    {
+        $this->enabled = true;
+    }
+
+    public function deactivate(): void
+    {
+        $this->enabled = false;
     }
 }
