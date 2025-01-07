@@ -34,6 +34,11 @@ class ActivationToken
         return $this->id;
     }
 
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
     public function getUserId(): string
     {
         return $this->userId;

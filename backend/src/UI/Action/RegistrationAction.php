@@ -15,15 +15,17 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Uid\Uuid;
 
 #[Route(path: '/registration', name: 'registration', methods: ['POST'])]
-class RegistrationAction extends AbstractController
+class RegistrationAction
 {
     public function __construct(
         private readonly UserPasswordHasherInterface $userPasswordHasher,
         private readonly EntityManagerInterface      $entityManager,
         private readonly MailerInterface             $mailer,
+        private readonly UrlGeneratorInterface          $urlGenerator,
     )
     {
     }
@@ -63,8 +65,8 @@ class RegistrationAction extends AbstractController
             ->text('Your account has been created!')
             ->html(str_replace(
                 search: '{link}',
-                replace: $this->generateUrl('activation', ['token' => $activationToken->getId()]),
-                subject: 'Activate you account by clicking on the link below: <br/> {link}'
+                replace: $this->urlGenerator->generate('activation', ['token' => $activationToken->getToken()], UrlGeneratorInterface::ABSOLUTE_URL),
+                subject: 'Activate you account by clicking on the link below: <br/> <a href="{link}" target="_blank">{link}</a>',
                 ))
         );
 
