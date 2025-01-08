@@ -9,6 +9,11 @@ framework:
             # failed: 'doctrine://default?queue_name=failed'
             # sync: 'sync://'
 
+            sqs:
+                dsn: 'sqs+http://localhost:4566/000000000000/myqueue'
+                options:
+                    queue_name: 'myqueue'
+
         routing:
             # Route your messages to the transports
             # 'App\Message\YourMessage': async

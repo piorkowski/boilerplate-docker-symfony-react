@@ -1,7 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\UI\DTO;
+
 use Symfony\Component\Validator\Constraints as Assert;
 
 final readonly class LoginUserData
@@ -12,7 +14,6 @@ final readonly class LoginUserData
         public string $email,
         #[Assert\NotBlank]
         public string $password,
-    )
-    {
+    ) {
     }
 }

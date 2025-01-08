@@ -6,14 +6,11 @@ namespace App\UI\DTO;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-final readonly class NewsletterSignInData
+final readonly class SendMessageToSubscribersData
 {
     public function __construct(
-        #[Assert\Email]
         #[Assert\NotBlank]
-        public string $email,
-        #[Assert\IsTrue()]
-        public bool $acceptedTerm,
+        public string $messageId,
     ) {
     }
 }

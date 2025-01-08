@@ -1,9 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-
-namespace App\UI\Action;
-
+namespace App\UI\Action\Security;
 
 use App\Entity\ActivationToken;
 use App\Repository\ActivationTokenRepository;
@@ -12,15 +11,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route(path:'/activation/{token}', name: 'activation', methods: ['GET'])]
+#[Route(path: '/activation/{token}', name: 'activation', methods: ['GET'])]
 readonly class ActivationAction
 {
     public function __construct(
         private ActivationTokenRepository $activationTokenRepository,
-        private UserRepository            $userRepository,
-        private EntityManagerInterface    $entityManager,
-    )
-    {
+        private UserRepository $userRepository,
+        private EntityManagerInterface $entityManager,
+    ) {
     }
 
     public function __invoke(string $token): JsonResponse
@@ -31,7 +29,7 @@ readonly class ActivationAction
             return new JsonResponse(['message' => 'Activation token not found'], 404);
         }
 
-        if(false === $activationToken->canBeUsed()){
+        if (false === $activationToken->canBeUsed()) {
             return new JsonResponse(['message' => 'Activation token cannot be used'], 403);
         }
 
@@ -40,7 +38,7 @@ readonly class ActivationAction
             return new JsonResponse(['message' => 'User not found'], 404);
         }
 
-        if(true === $user->isActive()){
+        if (true === $user->isActive()) {
             return new JsonResponse(['message' => 'User already active'], 403);
         }
 
@@ -48,6 +46,6 @@ readonly class ActivationAction
         $activationToken->useToken();
         $this->entityManager->flush();
 
-        return new JsonResponse(['message' => 'User activated'], 201);
+        return new JsonResponse(['message' => 'User activated'], 200);
     }
 }

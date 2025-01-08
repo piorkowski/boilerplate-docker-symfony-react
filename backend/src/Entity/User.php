@@ -24,8 +24,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         private ?string $email = null,
         #[ORM\Column]
         private bool $enabled = false,
-    )
-    {
+    ) {
     }
 
     public function getId(): ?string
@@ -52,13 +51,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string)$this->email;
+        return (string) $this->email;
     }
 
     /**
      * @return list<string>
-     * @see UserInterface
      *
+     * @see UserInterface
      */
     public function getRoles(): array
     {

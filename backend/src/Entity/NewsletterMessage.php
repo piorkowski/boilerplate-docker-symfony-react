@@ -4,29 +4,26 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\NewsletterMemberRepository;
+use App\Repository\NewsletterMessageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: NewsletterMemberRepository::class)]
-#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_MEMBER_EMAIL', fields: ['email'])]
-class NewsletterMember
+#[ORM\Entity(repositoryClass: NewsletterMessageRepository::class)]
+class NewsletterMessage
 {
     public function __construct(
         #[ORM\Id]
         #[ORM\Column(type: 'string')]
         private string $id,
         #[ORM\Column(type: 'string')]
-        private string $email,
-        #[ORM\Column(type: 'string', nullable: true)]
-        private ?string $userId,
+        private string $title,
+        #[ORM\Column(type: 'text')]
+        private string $message,
         #[ORM\Column(type: 'boolean')]
         private bool $active,
-        #[ORM\Column(type: 'boolean')]
-        private bool $acceptedTerms,
         #[ORM\Column(type: 'datetime_immutable')]
         private \DateTimeInterface $createdAt,
         #[ORM\Column(type: 'datetime_immutable', nullable: true)]
-        private ?DateTimeInterface $activatedAt,
+        private ?DateTimeInterface $updatedAt,
     ) {
     }
 
@@ -35,14 +32,14 @@ class NewsletterMember
         return $this->id;
     }
 
-    public function getEmail(): string
+    public function getTitle(): string
     {
-        return $this->email;
+        return $this->title;
     }
 
-    public function getUserId(): ?string
+    public function getMessage(): string
     {
-        return $this->userId;
+        return $this->message;
     }
 
     public function isActive(): bool
@@ -50,24 +47,15 @@ class NewsletterMember
         return $this->active;
     }
 
-    public function isAcceptedTerms(): bool
-    {
-        return $this->acceptedTerms;
-    }
-
     public function activate(): void
     {
         $this->active = true;
-        $this->activatedAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
     }
 
     public function deactivate(): void
     {
         $this->active = false;
-    }
-
-    public function acceptTerms(): void
-    {
-        $this->acceptedTerms = true;
+        $this->updatedAt = new \DateTimeImmutable();
     }
 }

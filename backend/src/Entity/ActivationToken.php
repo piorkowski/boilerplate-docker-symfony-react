@@ -1,11 +1,10 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 
 namespace App\Entity;
 
 use App\Repository\ActivationTokenRepository;
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ActivationTokenRepository::class)]
@@ -19,14 +18,13 @@ class ActivationToken
         private readonly string $id,
         #[ORM\Column(type: 'string')]
         private readonly string $token,
-        #[ORM\Column]
-        private readonly string $userId,
+        #[ORM\Column(nullable: true)]
+        private readonly ?string $userId,
         #[ORM\Column(type: 'datetime')]
         private readonly \DateTimeInterface $expiresAt,
         #[ORM\Column(type: 'boolean')]
         private bool $used,
-    )
-    {
+    ) {
     }
 
     public function getId(): string
@@ -56,7 +54,7 @@ class ActivationToken
 
     private function isExpired(): bool
     {
-        return $this->expiresAt < new DateTimeImmutable();
+        return $this->expiresAt < new \DateTimeImmutable();
     }
 
     private function isUsed(): bool

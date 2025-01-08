@@ -1,13 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
-namespace App\UI\Action;
+namespace App\UI\Action\Security;
 
 use App\Entity\ActivationToken;
 use App\Entity\User;
 use App\UI\DTO\RegistrationUserData;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
@@ -19,21 +19,19 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Uid\Uuid;
 
 #[Route(path: '/registration', name: 'registration', methods: ['POST'])]
-class RegistrationAction
+readonly class RegistrationAction
 {
     public function __construct(
-        private readonly UserPasswordHasherInterface $userPasswordHasher,
-        private readonly EntityManagerInterface      $entityManager,
-        private readonly MailerInterface             $mailer,
-        private readonly UrlGeneratorInterface          $urlGenerator,
-    )
-    {
+        private UserPasswordHasherInterface $userPasswordHasher,
+        private EntityManagerInterface $entityManager,
+        private MailerInterface $mailer,
+        private UrlGeneratorInterface $urlGenerator,
+    ) {
     }
 
     public function __invoke(
         #[MapRequestPayload] RegistrationUserData $registrationUserData,
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $user = new User(
             id: Uuid::v4()->toString(),
             password: null,
@@ -67,7 +65,7 @@ class RegistrationAction
                 search: '{link}',
                 replace: $this->urlGenerator->generate('activation', ['token' => $activationToken->getToken()], UrlGeneratorInterface::ABSOLUTE_URL),
                 subject: 'Activate you account by clicking on the link below: <br/> <a href="{link}" target="_blank">{link}</a>',
-                ))
+            ))
         );
 
         return new JsonResponse(['registration' => true], Response::HTTP_OK);
