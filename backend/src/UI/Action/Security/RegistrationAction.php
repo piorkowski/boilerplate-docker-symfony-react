@@ -5,7 +5,11 @@ declare(strict_types=1);
 namespace App\UI\Action\Security;
 
 use App\Entity\ActivationToken;
+use App\Entity\NewsletterMember;
 use App\Entity\User;
+use App\Infrastructure\Repository\ActivationTokenRepositoryInterface;
+use App\Infrastructure\Repository\NewsletterMemberRepositoryInterface;
+use App\Infrastructure\Repository\UserRepositoryInterface;
 use App\UI\DTO\RegistrationUserData;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,7 +27,9 @@ readonly class RegistrationAction
 {
     public function __construct(
         private UserPasswordHasherInterface $userPasswordHasher,
-        private EntityManagerInterface $entityManager,
+        private UserRepositoryInterface $userRepository,
+        private ActivationTokenRepositoryInterface $activationTokenRepository,
+        private NewsletterMemberRepositoryInterface $newsletterMemberRepository,
         private MailerInterface $mailer,
         private UrlGeneratorInterface $urlGenerator,
     ) {
@@ -42,8 +48,7 @@ readonly class RegistrationAction
         $password = $this->userPasswordHasher->hashPassword($user, $registrationUserData->password);
         $user->setPassword($password);
 
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
+        $this->userRepository->saveUser($user);
 
         $activationToken = new ActivationToken(
             id: Uuid::v4()->toString(),
@@ -53,8 +58,33 @@ readonly class RegistrationAction
             used: false,
         );
 
-        $this->entityManager->persist($activationToken);
-        $this->entityManager->flush();
+        $this->activationTokenRepository->saveToken($activationToken);
+
+        if(true === $registrationUserData->newsletterMember) {
+            $newsletterMember = new NewsletterMember(
+                id: Uuid::v4()->toString(),
+                email: $registrationUserData->email,
+                userId: $user->getId(),
+                active: false,
+                acceptedTerms: true,
+                createdAt: new \DateTimeImmutable(),
+                activatedAt: null,
+            );
+
+            $this->newsletterMemberRepository->saveMember($newsletterMember);
+
+            $this->mailer->send((new Email())
+                ->from('no-reply@example.com')
+                ->to($newsletterMember->getEmail())
+                ->subject('Newsletter Activation')
+                ->text('Your account has been created!')
+                ->html(str_replace(
+                    search: '{link}',
+                    replace: $this->urlGenerator->generate('newsletter_activation', ['token' => $newsletterMember->getId()], UrlGeneratorInterface::ABSOLUTE_URL),
+                    subject: 'Activate you subscription by clicking on the link below: <br/> <a href="{link}" target="_blank">{link}</a>',
+                ))
+            );
+        }
 
         $this->mailer->send((new Email())
             ->from('no-reply@example.com')

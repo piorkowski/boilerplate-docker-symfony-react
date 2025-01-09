@@ -22,8 +22,5 @@ final class LoginAction
         #[CurrentUser] ?User $user,
         #[MapRequestPayload] LoginUserData $loginUserData,
     ): JsonResponse {
-        $test = 0;
-
-        return new JsonResponse(['login' => true]);
     }
 }

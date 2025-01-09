@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\ActivationTokenRepository;
+use App\Infrastructure\Repository\ActivationTokenRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ActivationTokenRepository::class)]
@@ -37,7 +37,7 @@ class ActivationToken
         return $this->token;
     }
 
-    public function getUserId(): string
+    public function getUserId(): ?string
     {
         return $this->userId;
     }

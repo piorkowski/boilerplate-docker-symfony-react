@@ -14,6 +14,7 @@ final readonly class RegistrationUserData
         public string $email,
         #[Assert\NotBlank]
         public string $password,
+        public bool $newsletterMember = false,
     ) {
     }
 }

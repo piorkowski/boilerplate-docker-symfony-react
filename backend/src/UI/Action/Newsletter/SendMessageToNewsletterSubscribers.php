@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\UI\Action\Newsletter;
 
-use App\Repository\NewsletterMemberRepository;
-use App\Repository\NewsletterMessageRepository;
+use App\Infrastructure\Repository\NewsletterMemberRepository;
+use App\Infrastructure\Repository\NewsletterMessageRepository;
 use App\UI\DTO\SendMessageToSubscribersData;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;

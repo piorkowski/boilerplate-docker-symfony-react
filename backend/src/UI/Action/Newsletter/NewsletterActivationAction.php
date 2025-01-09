@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\UI\Action\Newsletter;
 
 use App\Entity\NewsletterMember;
-use App\Repository\NewsletterMemberRepository;
+use App\Infrastructure\Repository\NewsletterMemberRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +17,6 @@ use Symfony\Component\Routing\Attribute\Route;
 readonly class NewsletterActivationAction
 {
     public function __construct(
-        private EntityManagerInterface $entityManager,
         private NewsletterMemberRepository $newsletterMemberRepository,
         private MailerInterface $mailer,
     ) {
@@ -29,8 +28,7 @@ readonly class NewsletterActivationAction
         $newsletterMember = $this->newsletterMemberRepository->find($token);
         if ($newsletterMember instanceof NewsletterMember) {
             $newsletterMember->activate();
-            $this->entityManager->persist($newsletterMember);
-            $this->entityManager->flush();
+            $this->newsletterMemberRepository->saveMember($newsletterMember);
         }
 
         $this->mailer->send((new Email())

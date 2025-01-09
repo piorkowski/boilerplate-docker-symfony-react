@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\UI\Action\Newsletter;
 
 use App\Entity\NewsletterMember;
+use App\Infrastructure\Repository\NewsletterMemberRepositoryInterface;
 use App\UI\DTO\NewsletterSignInData;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,7 +21,7 @@ use Symfony\Component\Uid\Uuid;
 class SignInToNewsletterAction
 {
     public function __construct(
-        private readonly EntityManagerInterface $entityManager,
+        private readonly NewsletterMemberRepositoryInterface $newsletterMemberRepository,
         private readonly MailerInterface $mailer,
         private readonly UrlGeneratorInterface $urlGenerator,
     ) {
@@ -39,8 +40,7 @@ class SignInToNewsletterAction
             activatedAt: null,
         );
 
-        $this->entityManager->persist($newsletterMember);
-        $this->entityManager->flush();
+        $this->newsletterMemberRepository->saveMember($newsletterMember);
 
         $this->mailer->send((new Email())
             ->from('no-reply@example.com')

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\UI\Action\Security;
 
 use App\Entity\ActivationToken;
-use App\Repository\ActivationTokenRepository;
-use App\Repository\UserRepository;
+use App\Infrastructure\Repository\ActivationTokenRepository;
+use App\Infrastructure\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
@@ -17,7 +17,6 @@ readonly class ActivationAction
     public function __construct(
         private ActivationTokenRepository $activationTokenRepository,
         private UserRepository $userRepository,
-        private EntityManagerInterface $entityManager,
     ) {
     }
 
@@ -44,7 +43,7 @@ readonly class ActivationAction
 
         $user->activate();
         $activationToken->useToken();
-        $this->entityManager->flush();
+        $this->activationTokenRepository->saveToken($activationToken);
 
         return new JsonResponse(['message' => 'User activated'], 200);
     }
