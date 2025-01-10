@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Repository;
 
-use App\Entity\ActivationToken;
+use App\Application\Repository\ActivationTokenRepositoryInterface;
+use App\Domain\User\ActivationToken;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

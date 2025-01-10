@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Action\Security;
 
-use App\Entity\User;
+use App\Domain\User\User;
 use App\UI\DTO\LoginUserData;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;

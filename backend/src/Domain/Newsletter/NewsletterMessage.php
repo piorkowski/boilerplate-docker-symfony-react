@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Domain\Newsletter;
 
+use App\Entity\DateTimeInterface;
 use App\Infrastructure\Repository\NewsletterMessageRepository;
 use Doctrine\ORM\Mapping as ORM;
 

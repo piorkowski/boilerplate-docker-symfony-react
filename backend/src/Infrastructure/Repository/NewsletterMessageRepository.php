@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Repository;
 
-use App\Entity\NewsletterMessage;
+use App\Application\Repository\NewsletterMessageRepositoryInterface;
+use App\Domain\Newsletter\NewsletterMessage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

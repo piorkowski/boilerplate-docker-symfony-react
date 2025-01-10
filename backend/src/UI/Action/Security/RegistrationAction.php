@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\UI\Action\Security;
 
-use App\Entity\ActivationToken;
-use App\Entity\NewsletterMember;
-use App\Entity\User;
-use App\Infrastructure\Repository\ActivationTokenRepositoryInterface;
-use App\Infrastructure\Repository\NewsletterMemberRepositoryInterface;
-use App\Infrastructure\Repository\UserRepositoryInterface;
+use App\Application\Repository\ActivationTokenRepositoryInterface;
+use App\Application\Repository\NewsletterMemberRepositoryInterface;
+use App\Application\Repository\UserRepositoryInterface;
+use App\Domain\Newsletter\NewsletterMember;
+use App\Domain\User\ActivationToken;
+use App\Domain\User\User;
 use App\UI\DTO\RegistrationUserData;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;

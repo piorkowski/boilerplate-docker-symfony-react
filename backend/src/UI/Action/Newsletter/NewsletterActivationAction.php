@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\UI\Action\Newsletter;
 
-use App\Entity\NewsletterMember;
+use App\Domain\Newsletter\NewsletterMember;
 use App\Infrastructure\Repository\NewsletterMemberRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;

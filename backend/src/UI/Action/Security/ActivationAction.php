@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\UI\Action\Security;
 
-use App\Entity\ActivationToken;
+use App\Domain\User\ActivationToken;
 use App\Infrastructure\Repository\ActivationTokenRepository;
 use App\Infrastructure\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 

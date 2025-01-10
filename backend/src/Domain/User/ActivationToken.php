@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Domain\User;
 
 use App\Infrastructure\Repository\ActivationTokenRepository;
 use Doctrine\ORM\Mapping as ORM;

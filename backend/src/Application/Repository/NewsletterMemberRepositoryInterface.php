@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Repository;
+namespace App\Application\Repository;
 
-use App\Entity\NewsletterMember;
+use App\Domain\Newsletter\NewsletterMember;
 
 interface NewsletterMemberRepositoryInterface
 {

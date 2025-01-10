@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Repository;
+namespace App\Application\Repository;
 
-use App\Entity\User;
+use App\Domain\User\User;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 interface UserRepositoryInterface

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Repository;
+namespace App\Application\Repository;
 
-use App\Entity\ActivationToken;
+use App\Domain\User\ActivationToken;
 
 interface ActivationTokenRepositoryInterface
 {
