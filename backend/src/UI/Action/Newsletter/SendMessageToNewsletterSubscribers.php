@@ -34,10 +34,10 @@ readonly class SendMessageToNewsletterSubscribers
         foreach ($subscribers as $subscriber) {
             $this->mailer->send((new Email())
                 ->from('no-reply@example.com')
-                ->to($subscriber->getEmail())
-                ->subject($message->getTitle())
-                ->text($message->getMessage())
-                ->html($message->getMessage())
+                ->to($subscriber->email)
+                ->subject($message->title)
+                ->text($message->message)
+                ->html($message->message)
             );
         }
 

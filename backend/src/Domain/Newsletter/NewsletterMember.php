@@ -15,45 +15,26 @@ class NewsletterMember
     public function __construct(
         #[ORM\Id]
         #[ORM\Column(type: 'string')]
-        private string $id,
+        public string $id,
         #[ORM\Column(type: 'string')]
-        private string $email,
+        public string $email,
+        #[ORM\Column(type: 'string')]
+        public string $name,
         #[ORM\Column(type: 'string', nullable: true)]
-        private ?string $userId,
+        public ?string $userId,
         #[ORM\Column(type: 'boolean')]
-        private bool $active,
+        public bool $active,
         #[ORM\Column(type: 'boolean')]
-        private bool $acceptedTerms,
+        public bool $acceptedTerms,
         #[ORM\Column(type: 'datetime_immutable')]
-        private \DateTimeInterface $createdAt,
+        public \DateTimeInterface $createdAt,
         #[ORM\Column(type: 'datetime_immutable', nullable: true)]
-        private ?DateTimeInterface $activatedAt,
+        public ?\DateTimeInterface $activatedAt,
     ) {
     }
-
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    public function getUserId(): ?string
-    {
-        return $this->userId;
-    }
-
-    public function isActive(): bool
-    {
-        return $this->active;
-    }
-
     public function isAcceptedTerms(): bool
     {
-        return $this->acceptedTerms;
+        return true === $this->acceptedTerms;
     }
 
     public function activate(): void

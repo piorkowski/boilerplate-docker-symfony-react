@@ -7,6 +7,7 @@ namespace App\Infrastructure\Repository;
 use App\Application\Repository\NewsletterMemberRepositoryInterface;
 use App\Domain\Newsletter\NewsletterMember;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +18,16 @@ class NewsletterMemberRepository extends ServiceEntityRepository implements News
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, NewsletterMember::class);
+    }
+
+    public function getMember(string $memberId): NewsletterMember
+    {
+        $newsletterMember = $this->find($memberId);
+        if(!$newsletterMember instanceof NewsletterMember) {
+            throw new EntityNotFoundException('Member not found');
+        }
+
+        return $newsletterMember;
     }
 
     public function saveMember(NewsletterMember $newsletterMember): void

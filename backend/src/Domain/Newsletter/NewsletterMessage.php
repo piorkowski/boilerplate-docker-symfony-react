@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domain\Newsletter;
 
-use App\Entity\DateTimeInterface;
 use App\Infrastructure\Repository\NewsletterMessageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,38 +13,23 @@ class NewsletterMessage
     public function __construct(
         #[ORM\Id]
         #[ORM\Column(type: 'string')]
-        private string $id,
+        public string $id,
         #[ORM\Column(type: 'string')]
-        private string $title,
+        public string $title,
         #[ORM\Column(type: 'text')]
-        private string $message,
+        public string $message,
         #[ORM\Column(type: 'boolean')]
-        private bool $active,
+        public bool $active,
         #[ORM\Column(type: 'datetime_immutable')]
-        private \DateTimeInterface $createdAt,
+        public \DateTimeInterface $createdAt,
         #[ORM\Column(type: 'datetime_immutable', nullable: true)]
-        private ?DateTimeInterface $updatedAt,
+        public ?\DateTimeInterface $updatedAt,
     ) {
-    }
-
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    public function getMessage(): string
-    {
-        return $this->message;
     }
 
     public function isActive(): bool
     {
-        return $this->active;
+        return true === $this->active ;
     }
 
     public function activate(): void

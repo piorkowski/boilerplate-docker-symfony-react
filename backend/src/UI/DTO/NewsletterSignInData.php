@@ -12,6 +12,8 @@ final readonly class NewsletterSignInData
         #[Assert\Email]
         #[Assert\NotBlank]
         public string $email,
+        #[Assert\NotBlank]
+        public string $name,
         #[Assert\IsTrue()]
         public bool $acceptedTerm,
     ) {

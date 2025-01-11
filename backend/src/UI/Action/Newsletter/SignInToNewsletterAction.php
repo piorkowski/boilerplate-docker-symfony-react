@@ -41,18 +41,6 @@ class SignInToNewsletterAction
 
         $this->newsletterMemberRepository->saveMember($newsletterMember);
 
-        $this->mailer->send((new Email())
-            ->from('no-reply@example.com')
-            ->to($newsletterMember->getEmail())
-            ->subject('Newsletter Activation')
-            ->text('Your account has been created!')
-            ->html(str_replace(
-                search: '{link}',
-                replace: $this->urlGenerator->generate('newsletter_activation', ['token' => $newsletterMember->getId()], UrlGeneratorInterface::ABSOLUTE_URL),
-                subject: 'Activate you subscription by clicking on the link below: <br/> <a href="{link}" target="_blank">{link}</a>',
-            ))
-        );
-
         return new JsonResponse(['newsletter ' => true], Response::HTTP_OK);
     }
 }

@@ -32,7 +32,7 @@ readonly class NewsletterActivationAction
 
         $this->mailer->send((new Email())
             ->from('no-reply@example.com')
-            ->to($newsletterMember->getEmail())
+            ->to($newsletterMember->email)
             ->subject('Newsletter Activated')
             ->text('Your subscription has been activated.!')
             ->html('Your subscription has been activated.!')
