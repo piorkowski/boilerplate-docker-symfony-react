@@ -15,33 +15,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct(
         #[ORM\Id]
         #[ORM\Column]
-        private readonly string $id,
+        public readonly string $id,
         #[ORM\Column]
-        private ?string $password,
+        public ?string $password,
         #[ORM\Column]
-        private array $roles = [],
+        public array $roles,
         #[ORM\Column(length: 180)]
-        private ?string $email = null,
+        public string $email,
         #[ORM\Column]
-        private bool $enabled = false,
+        public bool $enabled = false,
     ) {
     }
-
-    public function getId(): ?string
-    {
-        return $this->id;
-    }
-
     public function getEmail(): ?string
     {
         return $this->email;
-    }
-
-    public function setEmail(string $email): static
-    {
-        $this->email = $email;
-
-        return $this;
     }
 
     /**

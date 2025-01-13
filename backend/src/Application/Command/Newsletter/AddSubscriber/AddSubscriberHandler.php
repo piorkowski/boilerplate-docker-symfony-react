@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Command\Newsletter\AddSubscriber;
 
-use App\Application\Command\Newsletter\Exception\CannotCreateSubscriberException;
+use App\Application\Exception\CannotCreateSubscriberException;
 use App\Application\Factory\NewsletterMemberFactoryInterface;
 use App\Application\Repository\NewsletterMemberRepositoryInterface;
 use App\Domain\Newsletter\NewsletterMember;

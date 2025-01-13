@@ -9,5 +9,5 @@ use App\Domain\User\User;
 
 interface UserFactoryInterface
 {
-    public function create(): User;
+    public function create(string $email, string $password): User;
 }

@@ -10,7 +10,7 @@ use App\Shared\Command\CommandInterface;
 final readonly class ActivateUserCommand implements CommandInterface
 {
     public function __construct(
-        public string $userId,
+        public string $id,
     )
     {
     }

@@ -52,7 +52,7 @@ readonly class RegistrationAction
         $activationToken = new ActivationToken(
             id: Uuid::v4()->toString(),
             token: Uuid::v4()->toString(),
-            userId: $user->getId(),
+            userId: $user->id,
             expiresAt: new \DateTimeImmutable('now +2 hour'),
             used: false,
         );
@@ -63,7 +63,7 @@ readonly class RegistrationAction
             $newsletterMember = new NewsletterMember(
                 id: Uuid::v4()->toString(),
                 email: $registrationUserData->email,
-                userId: $user->getId(),
+                userId: $user->id,
                 active: false,
                 acceptedTerms: true,
                 createdAt: new \DateTimeImmutable(),
