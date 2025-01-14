@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Infrastructure\Entity\NewsletterMember" table="newsletter_member">
+
+        <id name="id" type="string" />
+
+        <field name="email" type="string" nullable="false" />
+
+        <field name="name" type="string" nullable="false" />
+
+        <field name="userId" type="string" nullable="true" />
+
+        <field name="active" type="boolean" nullable="false" />
+
+        <field name="acceptedTerms" type="boolean" nullable="false" />
+
+        <field name="createdAt" type="datetime_immutable" nullable="false" />
+
+        <field name="activatedAt" type="datetime_immutable" nullable="true" />
+
+    </entity>
+
+</doctrine-mapping>

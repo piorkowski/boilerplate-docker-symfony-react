@@ -1,9 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-
 namespace App\Application\Command\Newsletter\ActivateSubscriber;
-
 
 use App\Application\Repository\NewsletterMemberRepositoryInterface;
 use App\Domain\Newsletter\NewsletterMember;
@@ -18,15 +17,15 @@ final readonly class ActivateSubscriberHandler
         private NewsletterMemberRepositoryInterface $newsletterMemberRepository,
         private LoggerInterface $logger,
         private MailerInterface $mailer,
-    )
-    {
+    ) {
     }
 
     public function __invoke(ActivateSubscriberCommand $command): void
     {
-        try{
+        try {
             $member = $this->newsletterMemberRepository->getMember($command->memberId);
             $member->activate();
+            $member->acceptTerms();
             $this->newsletterMemberRepository->saveMember($member);
             $this->logger->info('Member activated');
             $this->sendEmail($member);
@@ -45,7 +44,7 @@ final readonly class ActivateSubscriberHandler
         ]);
     }
 
-    private function sendEmail(NewsletterMember $newsletterMember):void
+    private function sendEmail(NewsletterMember $newsletterMember): void
     {
         $this->mailer->send((new Email())
             ->from('no-reply@example.com')

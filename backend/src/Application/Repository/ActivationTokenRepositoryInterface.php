@@ -9,5 +9,6 @@ use App\Domain\User\ActivationToken;
 interface ActivationTokenRepositoryInterface
 {
     public function getActivationToken(string $token): ActivationToken;
+
     public function saveToken(ActivationToken $activationToken): void;
 }

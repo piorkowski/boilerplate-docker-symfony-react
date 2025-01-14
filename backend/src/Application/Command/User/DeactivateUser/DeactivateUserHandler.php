@@ -1,9 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-
 namespace App\Application\Command\User\DeactivateUser;
-
 
 use App\Application\Exception\CannotDeactivateUserException;
 use App\Infrastructure\Repository\UserRepository;
@@ -20,8 +19,7 @@ final readonly class DeactivateUserHandler
         private UserRepository $userRepository,
         private MailerInterface $mailer,
         private LoggerInterface $logger,
-    )
-    {
+    ) {
     }
 
     public function __invoke(DeactivateUserCommand $command): void
@@ -31,7 +29,7 @@ final readonly class DeactivateUserHandler
             $user->deactivate();
             $this->userRepository->saveUser($user);
             $this->mailer->send($this->prepareEmail($user->email));
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             $this->logger->error($exception->getMessage());
             throw new CannotDeactivateUserException($exception->getMessage(), previous: $exception->getPrevious());
         } catch (TransportExceptionInterface $e) {
@@ -47,6 +45,6 @@ final readonly class DeactivateUserHandler
             ->subject('Account deactivated')
             ->text('Your account has been deactivated.!')
             ->html('Your account has been deactivated.!')
-            ;
+        ;
     }
 }

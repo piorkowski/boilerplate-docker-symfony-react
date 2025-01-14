@@ -16,7 +16,7 @@ final readonly class CommandBus implements CommandBusInterface
     public function __construct(
         #[Autowire(service: 'command.bus.default')]
         private MessageBusInterface $commandBus,
-        private LoggerInterface $logger
+        private LoggerInterface $logger,
     ) {
     }
 

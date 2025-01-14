@@ -2,62 +2,37 @@
 
 namespace App\Domain\User;
 
-use App\Infrastructure\Repository\UserRepository;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
-#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    /**
+     * @param list<string> $roles
+     */
     public function __construct(
-        #[ORM\Id]
-        #[ORM\Column]
         public readonly string $id,
-        #[ORM\Column]
         public ?string $password,
-        #[ORM\Column]
         public array $roles,
-        #[ORM\Column(length: 180)]
         public string $email,
-        #[ORM\Column]
         public bool $enabled = false,
     ) {
     }
-    public function getEmail(): ?string
+
+    public function getUserIdentifier(): string
     {
         return $this->email;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUserIdentifier(): string
-    {
-        return (string) $this->email;
-    }
-
-    /**
-     * @return list<string>
-     *
-     * @see UserInterface
-     */
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
 
-    /**
-     * @param list<string> $roles
-     */
+    /** @param list<string> $roles */
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
@@ -65,9 +40,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
     public function getPassword(): ?string
     {
         return $this->password;

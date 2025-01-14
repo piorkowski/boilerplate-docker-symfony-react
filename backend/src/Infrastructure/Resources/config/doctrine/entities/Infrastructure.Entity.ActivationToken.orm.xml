@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Infrastructure\Entity\ActivationToken" table="`activation_token`" repository-class="App\Infrastructure\Repository\ActivationTokenRepository">
+        <unique-constraints>
+            <unique-constraint name="UNIQUE_TOKEN" columns="token"/>
+        </unique-constraints>
+
+        <id name="id" type="string" />
+
+        <field name="token" type="string" nullable="false"/>
+        <field name="userId" type="string" nullable="true"/>
+        <field name="expiresAt" type="datetime" nullable="false"/>
+        <field name="used" type="boolean" nullable="false"/>
+    </entity>
+
+</doctrine-mapping>

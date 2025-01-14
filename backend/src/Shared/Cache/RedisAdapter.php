@@ -1,26 +1,22 @@
 <?php
+
 declare(strict_types=1);
 
-
 namespace App\Shared\Cache;
-
-
-use Redis;
 
 readonly class RedisAdapter implements CacheAdapterInterface
 {
     public function __construct(
-        private Redis $redis,
-    )
-    {
+        private \Redis $redis,
+    ) {
     }
 
-public function get(CacheQueryInterface $cacheQuery): ?array
+    public function get(CacheQueryInterface $cacheQuery): ?array
     {
         try {
-        $cachedData = $this->redis->get($cacheQuery->getKey());
+            $cachedData = $this->redis->get($cacheQuery->getKey());
 
-            if ($cachedData === null) {
+            if (null === $cachedData) {
                 return null;
             }
 
@@ -37,5 +33,4 @@ public function get(CacheQueryInterface $cacheQuery): ?array
         } catch (\Throwable $exception) {
         }
     }
-
 }

@@ -58,7 +58,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             $user = $this->getUser($userId);
             $user->activate();
             $this->saveUser($user);
-        }catch (\Throwable $e){
+        } catch (\Throwable $e) {
             throw new CannotActivateUserException($e->getMessage(), previous: $e->getPrevious());
         }
     }
@@ -69,7 +69,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             $user = $this->getUser($userId);
             $user->deactivate();
             $this->saveUser($user);
-        }catch (\Throwable $e){
+        } catch (\Throwable $e) {
             throw new CannotDeactivateUserException($e->getMessage(), previous: $e->getPrevious());
         }
     }

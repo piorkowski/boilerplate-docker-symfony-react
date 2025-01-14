@@ -23,7 +23,7 @@ class ActivationTokenRepository extends ServiceEntityRepository implements Activ
     public function getActivationToken(string $token): ActivationToken
     {
         $token = $this->findOneBy(['token' => $token]);
-        if(null === $token) {
+        if (null === $token) {
             throw new EntityNotFoundException('Activation token not found');
         }
 

@@ -9,5 +9,6 @@ use App\Domain\Newsletter\NewsletterMember;
 interface NewsletterMemberRepositoryInterface
 {
     public function getMember(string $memberId): NewsletterMember;
+
     public function saveMember(NewsletterMember $newsletterMember): void;
 }

@@ -23,7 +23,7 @@ class NewsletterMessageRepository extends ServiceEntityRepository implements New
     public function getNewsletterMessage(string $id): NewsletterMessage
     {
         $message = $this->find($id);
-        if(null === $message) {
+        if (null === $message) {
             throw new EntityNotFoundException('Newsletter Message not found');
         }
 

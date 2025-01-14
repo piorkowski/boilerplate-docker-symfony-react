@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Shared\Query;
@@ -18,11 +19,7 @@ class QueryBus implements QueryBusInterface
         } catch (HandlerFailedException $exception) {
             $previous = $exception->getPrevious() ?? $exception;
 
-            throw new QueryBusException(
-                message: $previous->getMessage(),
-                code: $previous->getCode(),
-                previous: $previous,
-            );
+            throw new QueryBusException(message: $previous->getMessage(), code: $previous->getCode(), previous: $previous);
         }
     }
 }

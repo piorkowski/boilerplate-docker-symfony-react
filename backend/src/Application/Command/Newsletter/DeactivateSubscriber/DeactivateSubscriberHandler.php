@@ -1,9 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-
 namespace App\Application\Command\Newsletter\DeactivateSubscriber;
-
 
 use App\Application\Repository\NewsletterMemberRepositoryInterface;
 use App\Shared\Exception\CommandBusException;
@@ -13,14 +12,13 @@ final readonly class DeactivateSubscriberHandler
 {
     public function __construct(
         private NewsletterMemberRepositoryInterface $newsletterMemberRepository,
-        private LoggerInterface $logger
-    )
-    {
+        private LoggerInterface $logger,
+    ) {
     }
 
     public function __invoke(DeactivateSubscriberCommand $command): void
     {
-        try{
+        try {
             $member = $this->newsletterMemberRepository->getMember($command->memberId);
             $member->deactivate();
             $this->newsletterMemberRepository->saveMember($member);

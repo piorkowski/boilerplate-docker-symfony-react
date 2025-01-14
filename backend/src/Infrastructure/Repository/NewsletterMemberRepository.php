@@ -23,7 +23,7 @@ class NewsletterMemberRepository extends ServiceEntityRepository implements News
     public function getMember(string $memberId): NewsletterMember
     {
         $newsletterMember = $this->find($memberId);
-        if(!$newsletterMember instanceof NewsletterMember) {
+        if (!$newsletterMember instanceof NewsletterMember) {
             throw new EntityNotFoundException('Member not found');
         }
 

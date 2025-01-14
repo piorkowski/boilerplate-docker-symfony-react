@@ -31,7 +31,7 @@ readonly class ActivationAction
             return new JsonResponse(['message' => 'Activation token cannot be used'], 403);
         }
 
-        $user = $this->userRepository->find($activationToken->getUserId());
+        $user = $this->userRepository->find($activationToken->userId);
         if (null === $user) {
             return new JsonResponse(['message' => 'User not found'], 404);
         }

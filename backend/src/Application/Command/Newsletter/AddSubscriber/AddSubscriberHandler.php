@@ -1,6 +1,6 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 
 namespace App\Application\Command\Newsletter\AddSubscriber;
 
@@ -23,24 +23,22 @@ final readonly class AddSubscriberHandler
         private MailerInterface $mailer,
         private UrlGeneratorInterface $urlGenerator,
         private LoggerInterface $logger,
-    )
-    {
+    ) {
     }
 
     public function __invoke(AddSubscriberCommand $command): void
     {
         try {
-        $member = $this->newsletterMemberFactory->create();
-        $this->newsletterMemberRepository->saveMember($member);
-        $this->sendEmail($member);
-
+            $member = $this->newsletterMemberFactory->create($command->email, $command->name, $command->userId);
+            $this->newsletterMemberRepository->saveMember($member);
+            $this->sendEmail($member);
         } catch (\Throwable $exception) {
             $this->logger->error($exception->getMessage());
             throw new CannotCreateSubscriberException($exception->getMessage(), previous: $exception->getPrevious());
         }
     }
 
-    private function sendEmail(NewsletterMember $newsletterMember):void
+    private function sendEmail(NewsletterMember $newsletterMember): void
     {
         $this->mailer->send((new Email())
             ->from('no-reply@example.com')

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Application\Command\User\ActivateUser;
@@ -15,11 +16,10 @@ use Symfony\Component\Mime\Email;
 final readonly class ActivateUserHandler
 {
     public function __construct(
-        private UserRepository  $userRepository,
+        private UserRepository $userRepository,
         private MailerInterface $mailer,
         private LoggerInterface $logger,
-    )
-    {
+    ) {
     }
 
     public function __invoke(ActivateUserCommand $command): void
