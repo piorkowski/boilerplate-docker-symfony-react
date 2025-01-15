@@ -4,33 +4,37 @@ declare(strict_types=1);
 
 namespace App\Shared\Cache;
 
+use Psr\Log\LoggerInterface;
+
 readonly class RedisAdapter implements CacheAdapterInterface
 {
     public function __construct(
+        private LoggerInterface $logger,
         private \Redis $redis,
     ) {
     }
 
-    public function get(CacheQueryInterface $cacheQuery): ?array
+
+    public function get(CacheQueryInterface $cacheQuery): ?string
     {
         try {
+            /** @var false|string $cachedData */
             $cachedData = $this->redis->get($cacheQuery->getKey());
 
-            if (null === $cachedData) {
-                return null;
-            }
-
-            return json_decode($cachedData, false, 512, JSON_THROW_ON_ERROR);
-        } catch (\Throwable $exception) {
-            return null;
+            return $cachedData ?: null;
+        } catch (\Exception $exception) {
+            $this->logger->warning($exception->getMessage());
         }
+
+        return null;
     }
 
     public function set(CacheEntryInterface $cacheEntry): void
     {
         try {
-            $this->redis->setex($cacheEntry->getKey(), $cacheEntry->getTTL(), $cacheEntry->getValue());
-        } catch (\Throwable $exception) {
+            $this->redis->set($cacheEntry->getKey(), $cacheEntry->getValue(), $cacheEntry->getTTL());
+        } catch (\Exception $exception) {
+            $this->logger->warning($exception->getMessage());
         }
     }
 }

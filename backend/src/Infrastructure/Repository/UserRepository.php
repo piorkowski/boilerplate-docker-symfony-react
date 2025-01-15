@@ -7,7 +7,7 @@ namespace App\Infrastructure\Repository;
 use App\Application\Exception\CannotActivateUserException;
 use App\Application\Exception\CannotDeactivateUserException;
 use App\Application\Repository\UserRepositoryInterface;
-use App\Domain\User\User;
+use App\Domain\Model\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\Persistence\ManagerRegistry;

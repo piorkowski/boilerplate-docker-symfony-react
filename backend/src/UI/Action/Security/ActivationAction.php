@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Action\Security;
 
-use App\Domain\User\ActivationToken;
+use App\Domain\Model\User\ActivationToken;
 use App\Infrastructure\Repository\ActivationTokenRepository;
 use App\Infrastructure\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;

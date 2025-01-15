@@ -8,7 +8,7 @@ use App\Application\Command\Newsletter\AddSubscriber\AddSubscriberCommand;
 use App\Application\Exception\CannotCreateSubscriberException;
 use App\Application\Factory\UserFactoryInterface;
 use App\Application\Repository\ActivationTokenRepositoryInterface;
-use App\Domain\User\ActivationToken;
+use App\Domain\Model\User\ActivationToken;
 use App\Infrastructure\Repository\UserRepository;
 use App\Shared\Command\CommandBusInterface;
 use Psr\Log\LoggerInterface;

@@ -6,5 +6,5 @@ namespace App\Shared\Query;
 
 interface QueryBusInterface
 {
-    public function query(QueryInterface $query);
+    public function query(QueryInterface $query): mixed;
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Action\Newsletter;
 
-use App\Domain\Newsletter\NewsletterMember;
+use App\Domain\Model\Newsletter\NewsletterMember;
 use App\Infrastructure\Repository\NewsletterMemberRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;

@@ -7,7 +7,7 @@ namespace App\Application\Command\Newsletter\AddSubscriber;
 use App\Application\Exception\CannotCreateSubscriberException;
 use App\Application\Factory\NewsletterMemberFactoryInterface;
 use App\Application\Repository\NewsletterMemberRepositoryInterface;
-use App\Domain\Newsletter\NewsletterMember;
+use App\Domain\Model\Newsletter\NewsletterMember;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;

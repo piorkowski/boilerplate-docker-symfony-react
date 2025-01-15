@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Query\Newsletter\GetSubscribers;
 
-use App\Domain\Newsletter\NewsletterMember;
+use App\Domain\Model\Newsletter\NewsletterMember;
 use App\Infrastructure\Repository\NewsletterMemberRepository;
 
 final readonly class GetSubscribersHandler

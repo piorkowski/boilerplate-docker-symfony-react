@@ -1,5 +1,9 @@
 parameters:
-    level: 10
+    level: max
+    checkUninitializedProperties: true
+    parallel:
+        maximumNumberOfProcesses: 64
+        minimumNumberOfJobsPerProcess: 4
     paths:
         - bin/
         - config/

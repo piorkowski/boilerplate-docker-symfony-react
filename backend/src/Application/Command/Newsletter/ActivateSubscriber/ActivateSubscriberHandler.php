@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Application\Command\Newsletter\ActivateSubscriber;
 
 use App\Application\Repository\NewsletterMemberRepositoryInterface;
-use App\Domain\Newsletter\NewsletterMember;
+use App\Domain\Model\Newsletter\NewsletterMember;
 use App\Shared\Exception\CommandBusException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Mailer\MailerInterface;

@@ -6,7 +6,7 @@ namespace App\Shared\Cache;
 
 interface CacheAdapterInterface
 {
-    public function get(CacheQueryInterface $cacheQuery): ?array;
+    public function get(CacheQueryInterface $cacheQuery): ?string;
 
     public function set(CacheEntryInterface $cacheEntry): void;
 }

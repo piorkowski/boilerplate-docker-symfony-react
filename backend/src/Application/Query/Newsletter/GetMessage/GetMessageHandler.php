@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Application\Query\Newsletter\GetMessage;
 
 use App\Application\Repository\NewsletterMessageRepositoryInterface;
-use App\Domain\Newsletter\NewsletterMessage;
+use App\Domain\Model\Newsletter\NewsletterMessage;
 use App\Shared\Exception\QueryBusException;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 

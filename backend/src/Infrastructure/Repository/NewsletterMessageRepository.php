@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Repository;
 
 use App\Application\Repository\NewsletterMessageRepositoryInterface;
-use App\Domain\Newsletter\NewsletterMessage;
+use App\Domain\Model\Newsletter\NewsletterMessage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\Persistence\ManagerRegistry;

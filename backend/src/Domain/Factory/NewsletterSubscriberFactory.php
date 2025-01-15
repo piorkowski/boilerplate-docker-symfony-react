@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Factory;
 
 use App\Application\Factory\NewsletterMemberFactoryInterface;
-use App\Domain\Newsletter\NewsletterMember;
+use App\Domain\Model\Newsletter\NewsletterMember;
 use Symfony\Component\Uid\Uuid;
 
 class NewsletterSubscriberFactory implements NewsletterMemberFactoryInterface

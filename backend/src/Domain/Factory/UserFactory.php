@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Factory;
 
 use App\Application\Factory\UserFactoryInterface;
-use App\Domain\User\User;
+use App\Domain\Model\User\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Uid\Uuid;
 

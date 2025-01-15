@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Application\Query\User\GetUser;
 
 use App\Application\Repository\UserRepositoryInterface;
-use App\Domain\User\User;
+use App\Domain\Model\User\User;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]

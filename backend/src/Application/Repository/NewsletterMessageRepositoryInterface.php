@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Repository;
 
-use App\Domain\Newsletter\NewsletterMessage;
+use App\Domain\Model\Newsletter\NewsletterMessage;
 
 interface NewsletterMessageRepositoryInterface
 {

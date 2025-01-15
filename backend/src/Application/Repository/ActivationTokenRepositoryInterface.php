@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Repository;
 
-use App\Domain\User\ActivationToken;
+use App\Domain\Model\User\ActivationToken;
 
 interface ActivationTokenRepositoryInterface
 {
